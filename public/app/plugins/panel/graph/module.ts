@@ -1,5 +1,5 @@
 import './graph';
-import './legend';
+import './GraphLegend';
 import './series_overrides_ctrl';
 import './thresholds_form';
 
