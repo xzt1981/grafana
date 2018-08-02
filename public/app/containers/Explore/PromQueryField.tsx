@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import React from 'react';
 
 // dom also includes Element polyfills
@@ -17,6 +18,8 @@ import TypeaheadField, {
 } from './QueryField';
 
 const EMPTY_METRIC = '';
+const HISTORY_ITEM_COUNT = 5;
+const HISTORY_COUNT_CUTOFF = 1000 * 60 * 60 * 24; // 24h
 const METRIC_MARK = 'metric';
 const PRISM_LANGUAGE = 'promql';
 
@@ -25,6 +28,22 @@ export const setFunctionMove = (suggestion: Suggestion): Suggestion => {
   suggestion.move = -1;
   return suggestion;
 };
+
+export function addHistoryMetadata(item: Suggestion, history: any[]): Suggestion {
+  const cutoffTs = Date.now() - HISTORY_COUNT_CUTOFF;
+  const historyForItem = history.filter(h => h.ts > cutoffTs && h.query === item.label);
+  const count = historyForItem.length;
+  const recent = historyForItem.pop();
+  let hint = `Queried ${count} times in the last 24h.`;
+  if (recent) {
+    const lastQueried = moment(recent.ts).fromNow();
+    hint = `${hint} Last queried ${lastQueried}.`;
+  }
+  return {
+    ...item,
+    documentation: hint,
+  };
+}
 
 export function willApplySuggestion(
   suggestion: string,
@@ -57,6 +76,7 @@ export function willApplySuggestion(
 }
 
 interface PromQueryFieldProps {
+  history?: any[];
   initialQuery?: string | null;
   labelKeys?: { [index: string]: string[] }; // metric -> [labelKey,...]
   labelValues?: { [index: string]: { [index: string]: string[] } }; // metric -> labelKey -> [labelValue,...]
@@ -163,17 +183,38 @@ class PromQueryField extends React.Component<PromQueryFieldProps, PromQueryField
   }
 
   getEmptyTypeahead(): TypeaheadOutput {
+    const { history } = this.props;
+    const { metrics } = this.state;
     const suggestions: SuggestionGroup[] = [];
+
+    if (history && history.length > 0) {
+      const historyItems = _.chain(history)
+        .uniqBy('query')
+        .takeRight(HISTORY_ITEM_COUNT)
+        .map(h => h.query)
+        .map(wrapLabel)
+        .map(item => addHistoryMetadata(item, history))
+        .reverse()
+        .value();
+
+      suggestions.push({
+        prefixMatch: true,
+        skipSort: true,
+        label: 'History',
+        items: historyItems,
+      });
+    }
+
     suggestions.push({
       prefixMatch: true,
       label: 'Functions',
       items: FUNCTIONS.map(setFunctionMove),
     });
 
-    if (this.state.metrics) {
+    if (metrics) {
       suggestions.push({
         label: 'Metrics',
-        items: this.state.metrics.map(wrapLabel),
+        items: metrics.map(wrapLabel),
       });
     }
     return { suggestions };
