@@ -1,25 +1,25 @@
 <page-header model="ctrl.navModel"></page-header>
 
 <div class="page-container page-body" ng-cloak>
-	<h3 class="page-sub-heading">New Team</h3>
+	<h3 class="page-sub-heading">新建组</h3>
 
 	<form name="ctrl.saveForm" class="gf-form-group" ng-submit="ctrl.create()">
 		<div class="gf-form max-width-30">
-			<span class="gf-form-label width-10">Name</span>
+			<span class="gf-form-label width-10">组名</span>
 			<input type="text" required ng-model="ctrl.name" class="gf-form-input max-width-22" give-focus="true">
 		</div>
 		<div class="gf-form max-width-30">
 			<span class="gf-form-label width-10">
-				Email
+				电子邮箱
 				<info-popover mode="right-normal">
-					This is optional and is primarily used for allowing custom team avatars.
+					该项是可选的，主要用作用户组的别名。
 				</info-popover>
 			</span>
 			<input class="gf-form-input max-width-22" type="email" ng-model="ctrl.email" placeholder="email@test.com">
 		</div>
 		<div class="gf-form-button-row">
 			<button type="submit" class="btn btn-success width-12">
-				<i class="fa fa-save"></i> Create
+				<i class="fa fa-save"></i> 创建
 			</button>
 		</div>
 	</form>

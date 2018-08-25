@@ -161,7 +161,7 @@ export class SearchSrv {
         } else {
           section = {
             id: 0,
-            title: 'General',
+            title: '常规',
             items: [],
             icon: 'fa fa-folder-open',
             toggle: this.toggleFolder.bind(this),

@@ -89,14 +89,14 @@ func GetDashboard(c *m.ReqContext) Response {
 		IsFolder:    dash.IsFolder,
 		FolderId:    dash.FolderId,
 		Url:         dash.GetUrl(),
-		FolderTitle: "General",
+		FolderTitle: "常规",
 	}
 
 	// lookup folder title
 	if dash.FolderId > 0 {
 		query := m.GetDashboardQuery{Id: dash.FolderId, OrgId: c.OrgId}
 		if err := bus.Dispatch(&query); err != nil {
-			return Error(500, "Dashboard folder could not be read", err)
+			return Error(500, "无法读取仪表盘文件夹", err)
 		}
 		meta.FolderTitle = query.Result.Title
 		meta.FolderUrl = query.Result.GetUrl()
@@ -307,7 +307,7 @@ func GetHomeDashboard(c *m.ReqContext) Response {
 	filePath := path.Join(setting.StaticRootPath, "dashboards/home.json")
 	file, err := os.Open(filePath)
 	if err != nil {
-		return Error(500, "Failed to load home dashboard", err)
+		return Error(500, "加载我的仪表盘失败", err)
 	}
 
 	dash := dtos.DashboardFullWithMeta{}
@@ -317,7 +317,7 @@ func GetHomeDashboard(c *m.ReqContext) Response {
 
 	jsonParser := json.NewDecoder(file)
 	if err := jsonParser.Decode(&dash.Dashboard); err != nil {
-		return Error(500, "Failed to load home dashboard", err)
+		return Error(500, "加载我的仪表盘失败", err)
 	}
 
 	if c.HasUserRole(m.ROLE_ADMIN) && !c.HasHelpFlag(m.HelpFlagGettingStartedPanelDismissed) {

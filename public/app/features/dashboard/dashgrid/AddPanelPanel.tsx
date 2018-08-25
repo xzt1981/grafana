@@ -104,7 +104,7 @@ export class AddPanelPanel extends React.Component<AddPanelPanelProps, AddPanelP
     };
 
     if (panelPluginInfo.id === 'row') {
-      newPanel.title = 'Row title';
+      newPanel.title = '行图标题';
       newPanel.gridPos = { x: 0, y: 0 };
     }
 
@@ -143,7 +143,7 @@ export class AddPanelPanel extends React.Component<AddPanelPanelProps, AddPanelP
   }
 
   noCopiedPanelPlugins() {
-    return <div className="add-panel__no-panels">No copied panels yet.</div>;
+    return <div className="add-panel__no-panels">尚未复制面板.</div>;
   }
 
   filterChange(evt) {
@@ -216,16 +216,16 @@ export class AddPanelPanel extends React.Component<AddPanelPanelProps, AddPanelP
         <div className="add-panel">
           <div className="add-panel__header">
             <i className="gicon gicon-add-panel" />
-            <span className="add-panel__title">New Panel</span>
+            <span className="add-panel__title">新建面板</span>
             <ul className="gf-tabs">
               <li className="gf-tabs-item">
                 <div className={'gf-tabs-link pointer ' + addClass} onClick={this.openAdd.bind(this)}>
-                  Add
+                  添加
                 </div>
               </li>
               <li className="gf-tabs-item">
                 <div className={'gf-tabs-link pointer ' + copyClass} onClick={this.openCopy.bind(this)}>
-                  Paste
+                  粘贴
                 </div>
               </li>
             </ul>
@@ -240,7 +240,7 @@ export class AddPanelPanel extends React.Component<AddPanelPanelProps, AddPanelP
                   type="text"
                   autoFocus
                   className="gf-form-input gf-form--grow"
-                  placeholder="Panel Search Filter"
+                  placeholder="查找面板"
                   value={this.state.filter}
                   onChange={this.filterChange.bind(this)}
                   onKeyPress={this.filterKeyPress.bind(this)}

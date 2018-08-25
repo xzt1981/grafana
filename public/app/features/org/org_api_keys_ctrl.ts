@@ -5,8 +5,8 @@ export class OrgApiKeysCtrl {
   constructor($scope, $http, backendSrv, navModelSrv) {
     $scope.navModel = navModelSrv.getNav('cfg', 'apikeys', 0);
 
-    $scope.roleTypes = ['Viewer', 'Editor', 'Admin'];
-    $scope.token = { role: 'Viewer' };
+    $scope.roleTypes = ['观察者', '编辑', '管理员'];
+    $scope.token = { role: '观察者' };
 
     $scope.init = function() {
       $scope.getTokens();

@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "Alert List",
+  "name": "报警列表",
   "id": "alertlist",
 
   "info": {

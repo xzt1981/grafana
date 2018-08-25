@@ -7,7 +7,7 @@ const template = `
 	<div class="modal-header">
 		<h2 class="modal-header-title">
 			<i class="fa fa-random"></i>
-			<span class="p-l-1">Switch Organization</span>
+			<span class="p-l-1">切换机构</span>
 		</h2>
 
 		<a class="modal-header-close" ng-click="ctrl.dismiss();">
@@ -19,8 +19,8 @@ const template = `
     <table class="filter-table form-inline">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Role</th>
+					<th>名字</th>
+					<th>角色</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -33,7 +33,7 @@ const template = `
 							Current
 						</span>
 						<a ng-click="ctrl.setUsingOrg(org)" class="btn btn-inverse btn-mini" ng-show="org.orgId !== ctrl.currentOrgId">
-							Switch to
+							切换至
 						</a>
 					</td>
 				</tr>

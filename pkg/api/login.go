@@ -20,7 +20,7 @@ const (
 func LoginView(c *m.ReqContext) {
 	viewData, err := setIndexViewData(c)
 	if err != nil {
-		c.Handle(500, "Failed to get settings", err)
+		c.Handle(500, "获取设置失败", err)
 		return
 	}
 
@@ -89,7 +89,7 @@ func tryLoginUsingRememberCookie(c *m.ReqContext) bool {
 
 func LoginAPIPing(c *m.ReqContext) {
 	if !tryLoginUsingRememberCookie(c) {
-		c.JsonApiErr(401, "Unauthorized", nil)
+		c.JsonApiErr(401, "授权失败", nil)
 		return
 	}
 
@@ -98,7 +98,7 @@ func LoginAPIPing(c *m.ReqContext) {
 
 func LoginPost(c *m.ReqContext, cmd dtos.LoginCommand) Response {
 	if setting.DisableLoginForm {
-		return Error(401, "Login is disabled", nil)
+		return Error(401, "禁止登录", nil)
 	}
 
 	authQuery := &m.LoginUserQuery{
@@ -110,10 +110,10 @@ func LoginPost(c *m.ReqContext, cmd dtos.LoginCommand) Response {
 
 	if err := bus.Dispatch(authQuery); err != nil {
 		if err == login.ErrInvalidCredentials || err == login.ErrTooManyLoginAttempts {
-			return Error(401, "Invalid username or password", err)
+			return Error(401, "用户名或者密码错误", err)
 		}
 
-		return Error(500, "Error while trying to authenticate user", err)
+		return Error(500, "用户认证失败", err)
 	}
 
 	user := authQuery.User
@@ -121,7 +121,7 @@ func LoginPost(c *m.ReqContext, cmd dtos.LoginCommand) Response {
 	loginUserWithUser(user, c)
 
 	result := map[string]interface{}{
-		"message": "Logged in",
+		"message": "成功登录",
 	}
 
 	if redirectTo, _ := url.QueryUnescape(c.GetCookie("redirect_to")); len(redirectTo) > 0 {

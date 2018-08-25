@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "Graph",
+  "name": "曲线图",
   "id": "graph",
 
   "info": {

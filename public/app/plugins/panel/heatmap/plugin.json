@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "Heatmap",
+  "name": "热图",
   "id": "heatmap",
 
   "info": {

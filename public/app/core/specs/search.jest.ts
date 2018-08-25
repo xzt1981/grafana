@@ -144,7 +144,7 @@ describe('SearchCtrl', () => {
       ctrl.results = [
         {
           id: 1,
-          title: 'folder',
+          title: '文件夹',
           items: [{ id: 2, selected: false }, { id: 4, selected: false }],
           selected: true,
           expanded: false,
@@ -152,7 +152,7 @@ describe('SearchCtrl', () => {
         },
         {
           id: 0,
-          title: 'General',
+          title: '常规',
           items: [{ id: 3, selected: false }, { id: 5, selected: false }],
           selected: false,
           expanded: true,

@@ -13,7 +13,7 @@
 			<div class="page-action-bar__spacer"></div>
 			<a class="page-header__cta btn btn-success" href="datasources/new">
 				<i class="fa fa-plus"></i>
-				Add data source
+				添加数据源
 			</a>
 		</div>
 
@@ -50,13 +50,13 @@
 
 	<div ng-if="ctrl.unfiltered.length === 0">
 		<empty-list-cta model="{
-			title: 'There are no data sources defined yet',
+			title: '尚未添加数据源',
 			buttonIcon: 'gicon gicon-add-datasources',
 			buttonLink: 'datasources/new',
-			buttonTitle: 'Add data source',
-			proTip: 'You can also define data sources through configuration files.',
+			buttonTitle: '添加数据源',
+			proTip: '还可以通过配置文件添加数据源。',
 			proTipLink: 'http://docs.grafana.org/administration/provisioning/#datasources?utm_source=grafana_ds_list',
-			proTipLinkTitle: 'Learn more',
+			proTipLinkTitle: '更多',
 			proTipTarget: '_blank'
 		}" />
 	</div>

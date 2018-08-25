@@ -4,7 +4,7 @@
   "id": "pluginlist",
 
   "info": {
-    "description": "Plugin List for Grafana",
+    "description": "Grafana的插件列表",
     "author": {
       "name": "Grafana Project",
       "url": "https://grafana.com"

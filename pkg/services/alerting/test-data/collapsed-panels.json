@@ -7,7 +7,7 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "name": "注释 & 报警",
         "type": "dashboard"
       }
     ]
@@ -26,7 +26,7 @@
         "y": 0
       },
       "id": 9,
-      "title": "Row title",
+      "title": "行图标题",
       "type": "row"
     },
     {
@@ -419,7 +419,7 @@
           ]
         }
       ],
-      "title": "Row title",
+      "title": "行图标题",
       "type": "row"
     },
     {
@@ -430,7 +430,7 @@
         "y": 11
       },
       "id": 4,
-      "title": "Row title",
+      "title": "行图标题",
       "type": "row"
     },
     {

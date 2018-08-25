@@ -8,7 +8,7 @@
 	</div>
 
 	<div class="gf-form">
-		<label class="gf-form-label query-keyword">Stats</label>
+		<label class="gf-form-label query-keyword">统计</label>
 	</div>
 
 	<div class="gf-form" ng-repeat="segment in statSegments">
@@ -22,7 +22,7 @@
 
 <div class="gf-form-inline" ng-if="target.expression.length === 0">
 	<div class="gf-form">
-		<label class="gf-form-label query-keyword width-8">Dimensions</label>
+		<label class="gf-form-label query-keyword width-8">维度</label>
 		<metric-segment ng-repeat="segment in dimSegments" segment="segment" get-options="getDimSegments(segment, $index)" on-change="dimSegmentChanged(segment, $index)"></metric-segment>
 	</div>
 

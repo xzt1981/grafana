@@ -1,8 +1,8 @@
 <div class="editor-row">
   <div class="section gf-form-group">
-    <h5 class="section-heading">Y Axis</h5>
+    <h5 class="section-heading">Y 轴</h5>
     <div class="gf-form">
-      <label class="gf-form-label width-8">Unit</label>
+      <label class="gf-form-label width-8">单位</label>
       <div class="gf-form-dropdown-typeahead width-12"
            ng-model="ctrl.panel.yAxis.format"
            dropdown-typeahead2="editor.unitFormats"
@@ -11,7 +11,7 @@
     </div>
     <div ng-if="ctrl.panel.dataFormat == 'timeseries'">
       <div class="gf-form">
-        <label class="gf-form-label width-8">Scale</label>
+        <label class="gf-form-label width-8">比例</label>
         <div class="gf-form-select-wrapper width-12">
           <select class="gf-form-input" ng-model="ctrl.panel.yAxis.logBase" ng-options="v as k for (k, v) in editor.logScales" ng-change="ctrl.refresh()"></select>
         </div>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="gf-form">
-      <label class="gf-form-label width-8">Decimals</label>
+      <label class="gf-form-label width-8">小数</label>
       <input type="number" class="gf-form-input width-12" placeholder="auto" data-placement="right"
       bs-tooltip="'Override automatic decimal precision for axis.'"
       ng-model="ctrl.panel.yAxis.decimals" ng-change="ctrl.render()" ng-model-onblur>
@@ -55,13 +55,13 @@
                                                                               ng-model="ctrl.panel.yBucketNumber" ng-change="ctrl.refresh()" ng-model-onblur>
       </div>
       <div class="gf-form" ng-show="ctrl.panel.yAxis.logBase === 1">
-        <label class="gf-form-label width-4">Size</label>
+        <label class="gf-form-label width-4">尺寸</label>
         <input type="number" class="gf-form-input width-5" placeholder="auto" data-placement="right"
                                                                               bs-tooltip="'Size of bucket. Has priority over Buckets option.'"
                                                                               ng-model="ctrl.panel.yBucketSize" ng-change="ctrl.refresh()" ng-model-onblur>
       </div>
       <div class="gf-form" ng-show="ctrl.panel.yAxis.logBase !== 1">
-        <label class="gf-form-label width-10">Split Factor</label>
+        <label class="gf-form-label width-10">比例因子</label>
         <input type="number"
                class="gf-form-input width-9"
                placeholder="1"
@@ -73,14 +73,14 @@
     </div>
     <div class="gf-form-inline">
       <div class="gf-form">
-        <label class="gf-form-label width-5">X Axis</label>
-        <label class="gf-form-label width-5">Buckets</label>
+        <label class="gf-form-label width-5">X 轴</label>
+        <label class="gf-form-label width-5">序列桶</label>
         <input type="number" class="gf-form-input width-5" placeholder="auto" data-placement="right"
                                                                               bs-tooltip="'Number of buckets for X axis.'"
                                                                               ng-model="ctrl.panel.xBucketNumber" ng-change="ctrl.refresh()" ng-model-onblur>
       </div>
       <div class="gf-form">
-        <label class="gf-form-label width-4">Size</label>
+        <label class="gf-form-label width-4">序列桶大小</label>
         <input type="text" class="gf-form-input width-5" placeholder="auto" data-placement="right"
                                                                             bs-tooltip="'Size of bucket. Number or interval (10s, 5m, 1h, etc). Supported intervals: ms, s, m, h, d, w, M, y. Has priority over Buckets option.'"
                                                                             ng-model="ctrl.panel.xBucketSize" ng-change="ctrl.refresh()" ng-model-onblur>
@@ -89,12 +89,12 @@
   </div>
 
   <div class="section gf-form-group">
-    <h5 class="section-heading">Data format</h5>
+    <h5 class="section-heading">数据格式</h5>
     <div class="gf-form">
-      <label class="gf-form-label width-5">Format</label>
+      <label class="gf-form-label width-5">格式</label>
       <div class="gf-form-select-wrapper max-width-15">
         <select class="gf-form-input" ng-model="ctrl.panel.dataFormat" ng-options="v as k for (k, v) in editor.dataFormats" ng-change="ctrl.render()"
-          data-placement="right" bs-tooltip="'Time series: create heatmap from regular time series. <br>Time series buckets: use histogram data returned from data source. Each series represents bucket which upper/lower bound is a series label.'">
+          data-placement="right" bs-tooltip="'时间序列: 根据常规时间序列生成热点图。 <br>时间序列桶: use histogram data returned from data source. Each series represents bucket which upper/lower bound is a series label.'">
         </select>
       </div>
     </div>

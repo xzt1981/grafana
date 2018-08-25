@@ -45,30 +45,30 @@ export const NavStore = types
       let main = {
         icon: 'fa fa-folder-open',
         id: 'manage-folder',
-        subTitle: 'Manage folder dashboards & permissions',
+        subTitle: '仪表盘和权限管理',
         url: '',
         text: folder.title,
-        breadcrumbs: [{ title: 'Dashboards', url: 'dashboards' }],
+        breadcrumbs: [{ title: '仪表盘', url: 'dashboards' }],
         children: [
           {
             active: activeChildId === 'manage-folder-dashboards',
             icon: 'fa fa-fw fa-th-large',
             id: 'manage-folder-dashboards',
-            text: 'Dashboards',
+            text: '仪表盘',
             url: folder.url,
           },
           {
             active: activeChildId === 'manage-folder-permissions',
             icon: 'fa fa-fw fa-lock',
             id: 'manage-folder-permissions',
-            text: 'Permissions',
+            text: '权限',
             url: `${folder.url}/permissions`,
           },
           {
             active: activeChildId === 'manage-folder-settings',
             icon: 'fa fa-fw fa-cog',
             id: 'manage-folder-settings',
-            text: 'Settings',
+            text: '设置',
             url: `${folder.url}/settings`,
           },
         ],
@@ -78,7 +78,7 @@ export const NavStore = types
     },
 
     initDatasourceEditNav(ds: any, plugin: any, currentPage: string) {
-      let title = 'New';
+      let title = '新建';
       let subTitle = `Type: ${plugin.name}`;
 
       if (ds.id) {
@@ -97,7 +97,7 @@ export const NavStore = types
             active: currentPage === 'datasource-settings',
             icon: 'fa fa-fw fa-sliders',
             id: 'datasource-settings',
-            text: 'Settings',
+            text: '设置',
             url: `datasources/edit/${ds.id}`,
           },
         ],
@@ -109,7 +109,7 @@ export const NavStore = types
           active: currentPage === 'datasource-dashboards',
           icon: 'fa fa-fw fa-th-large',
           id: 'datasource-dashboards',
-          text: 'Dashboards',
+          text: '仪表盘',
           url: `datasources/edit/${ds.id}/dashboards`,
         });
       }
@@ -121,7 +121,7 @@ export const NavStore = types
       let main = {
         img: team.avatarUrl,
         id: 'team-' + team.id,
-        subTitle: 'Manage members & settings',
+        subTitle: '组员和设置管理',
         url: '',
         text: team.name,
         breadcrumbs: [{ title: 'Teams', url: 'org/teams' }],
@@ -130,14 +130,14 @@ export const NavStore = types
             active: tab === 'members',
             icon: 'gicon gicon-team',
             id: 'team-members',
-            text: 'Members',
+            text: '组员',
             url: `org/teams/edit/${team.id}/members`,
           },
           {
             active: tab === 'settings',
             icon: 'fa fa-fw fa-sliders',
             id: 'team-settings',
-            text: 'Settings',
+            text: '设置',
             url: `org/teams/edit/${team.id}/settings`,
           },
         ],
@@ -148,7 +148,7 @@ export const NavStore = types
           active: tab === 'groupsync',
           icon: 'fa fa-fw fa-refresh',
           id: 'team-settings',
-          text: 'External group sync',
+          text: '外部组同步',
           url: `org/teams/edit/${team.id}/groupsync`,
         });
       }

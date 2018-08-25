@@ -27,7 +27,7 @@ describe('ManageDashboards', () => {
         },
         {
           id: 0,
-          title: 'General',
+          title: '常规',
           icon: 'fa fa-folder-open',
           uri: 'db/something-else',
           type: 'dash-db',
@@ -352,13 +352,13 @@ describe('ManageDashboards', () => {
         ctrl.sections = [
           {
             id: 1,
-            title: 'folder',
+            title: '文件夹',
             items: [{ id: 2, checked: false }],
             checked: false,
           },
           {
             id: 0,
-            title: 'General',
+            title: '常规',
             items: [{ id: 3, checked: true }],
             checked: false,
           },
@@ -380,13 +380,13 @@ describe('ManageDashboards', () => {
         ctrl.sections = [
           {
             id: 1,
-            title: 'folder',
+            title: '文件夹',
             items: [{ id: 2, checked: true }],
             checked: false,
           },
           {
             id: 0,
-            title: 'General',
+            title: '常规',
             items: [{ id: 3, checked: false }],
             checked: false,
           },
@@ -438,19 +438,19 @@ describe('ManageDashboards', () => {
         ctrl.sections = [
           {
             id: 1,
-            title: 'folder',
+            title: '文件夹',
             items: [{ id: 2, checked: false }],
             checked: true,
           },
           {
             id: 3,
-            title: 'folder',
+            title: '文件夹',
             items: [{ id: 4, checked: true }],
             checked: false,
           },
           {
             id: 0,
-            title: 'General',
+            title: '常规',
             items: [{ id: 3, checked: false }],
             checked: false,
           },
@@ -479,20 +479,20 @@ describe('ManageDashboards', () => {
         {
           id: 1,
           uid: 'folder',
-          title: 'folder',
+          title: '文件夹',
           items: [{ id: 2, checked: true, uid: 'folder-dash' }],
           checked: true,
         },
         {
           id: 3,
-          title: 'folder-2',
+          title: '文件夹',
           items: [{ id: 3, checked: true, uid: 'folder-2-dash' }],
           checked: false,
           uid: 'folder-2',
         },
         {
           id: 0,
-          title: 'General',
+          title: '常规',
           items: [{ id: 3, checked: true, uid: 'root-dash' }],
           checked: true,
         },

@@ -12,10 +12,10 @@ export const permissionOptions = [
 ];
 
 export const aclTypeValues = {
-  GROUP: { value: 'Group', text: 'Team' },
-  USER: { value: 'User', text: 'User' },
-  VIEWER: { value: 'Viewer', text: 'Everyone With Viewer Role' },
-  EDITOR: { value: 'Editor', text: 'Everyone With Editor Role' },
+  GROUP: { value: 'Group', text: '工作组' },
+  USER: { value: 'User', text: '用户' },
+  VIEWER: { value: 'Viewer', text: '每个拥有观察者角色的人' },
+  EDITOR: { value: 'Editor', text: '每个拥有编辑角色的人' },
 };
 
 export const aclTypes = Object.keys(aclTypeValues).map(item => aclTypeValues[item]);

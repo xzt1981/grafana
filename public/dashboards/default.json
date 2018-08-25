@@ -6,7 +6,7 @@
   "editable": true,
   "rows": [
     {
-      "title": "New row",
+      "title": "新建行",
       "height": "150px",
       "collapse": false,
       "editable": true,
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "title": "Welcome to Grafana",
+      "title": "欢迎使用Grafana",
       "height": "210px",
       "collapse": false,
       "editable": true,
