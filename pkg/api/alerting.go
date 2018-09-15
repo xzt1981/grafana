@@ -17,12 +17,12 @@ func ValidateOrgAlert(c *m.ReqContext) {
 	query := m.GetAlertByIdQuery{Id: id}
 
 	if err := bus.Dispatch(&query); err != nil {
-		c.JsonApiErr(404, "Alert not found", nil)
+		c.JsonApiErr(404, "报警未找到", nil)
 		return
 	}
 
 	if c.OrgId != query.Result.OrgId {
-		c.JsonApiErr(403, "You are not allowed to edit/view alert", nil)
+		c.JsonApiErr(403, "禁止编辑/查看报警", nil)
 		return
 	}
 }
@@ -31,7 +31,7 @@ func GetAlertStatesForDashboard(c *m.ReqContext) Response {
 	dashboardID := c.QueryInt64("dashboardId")
 
 	if dashboardID == 0 {
-		return Error(400, "Missing query parameter dashboardId", nil)
+		return Error(400, "没有查询参数：仪表盘ID", nil)
 	}
 
 	query := m.GetAlertStatesForDashboardQuery{
@@ -40,7 +40,7 @@ func GetAlertStatesForDashboard(c *m.ReqContext) Response {
 	}
 
 	if err := bus.Dispatch(&query); err != nil {
-		return Error(500, "Failed to fetch alert states", err)
+		return Error(500, "获取报警状态失败", err)
 	}
 
 	return JSON(200, query.Result)
@@ -84,7 +84,7 @@ func GetAlerts(c *m.ReqContext) Response {
 
 		err := bus.Dispatch(&searchQuery)
 		if err != nil {
-			return Error(500, "List alerts failed", err)
+			return Error(500, "报警列表读取失败", err)
 		}
 
 		for _, d := range searchQuery.Result {
@@ -114,7 +114,7 @@ func GetAlerts(c *m.ReqContext) Response {
 	}
 
 	if err := bus.Dispatch(&query); err != nil {
-		return Error(500, "List alerts failed", err)
+		return Error(500, "报警列表读取失败", err)
 	}
 
 	for _, alert := range query.Result {
@@ -127,7 +127,7 @@ func GetAlerts(c *m.ReqContext) Response {
 // POST /api/alerts/test
 func AlertTest(c *m.ReqContext, dto dtos.AlertTestCommand) Response {
 	if _, idErr := dto.Dashboard.Get("id").Int64(); idErr != nil {
-		return Error(400, "The dashboard needs to be saved at least once before you can test an alert rule", nil)
+		return Error(400, "只有在仪表盘保存后，才能测试报警规则", nil)
 	}
 
 	backendCmd := alerting.AlertTestCommand{
@@ -140,7 +140,7 @@ func AlertTest(c *m.ReqContext, dto dtos.AlertTestCommand) Response {
 		if validationErr, ok := err.(alerting.ValidationError); ok {
 			return Error(422, validationErr.Error(), nil)
 		}
-		return Error(500, "Failed to test rule", err)
+		return Error(500, "报警规则测试失败", err)
 	}
 
 	res := backendCmd.Result
@@ -172,7 +172,7 @@ func GetAlert(c *m.ReqContext) Response {
 	query := m.GetAlertByIdQuery{Id: id}
 
 	if err := bus.Dispatch(&query); err != nil {
-		return Error(500, "List alerts failed", err)
+		return Error(500, "报警列表读取失败", err)
 	}
 
 	return JSON(200, &query.Result)
@@ -186,7 +186,7 @@ func GetAlertNotifications(c *m.ReqContext) Response {
 	query := &m.GetAllAlertNotificationsQuery{OrgId: c.OrgId}
 
 	if err := bus.Dispatch(query); err != nil {
-		return Error(500, "Failed to get alert notifications", err)
+		return Error(500, "获取报警通知失败", err)
 	}
 
 	result := make([]*dtos.AlertNotification, 0)
@@ -212,7 +212,7 @@ func GetAlertNotificationByID(c *m.ReqContext) Response {
 	}
 
 	if err := bus.Dispatch(query); err != nil {
-		return Error(500, "Failed to get alert notifications", err)
+		return Error(500, "获取报警通知失败", err)
 	}
 
 	return JSON(200, query.Result)
@@ -222,7 +222,7 @@ func CreateAlertNotification(c *m.ReqContext, cmd m.CreateAlertNotificationComma
 	cmd.OrgId = c.OrgId
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to create alert notification", err)
+		return Error(500, "创建报警通知失败", err)
 	}
 
 	return JSON(200, cmd.Result)
@@ -232,7 +232,7 @@ func UpdateAlertNotification(c *m.ReqContext, cmd m.UpdateAlertNotificationComma
 	cmd.OrgId = c.OrgId
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to update alert notification", err)
+		return Error(500, "更新报警通知失败", err)
 	}
 
 	return JSON(200, cmd.Result)
@@ -245,10 +245,10 @@ func DeleteAlertNotification(c *m.ReqContext) Response {
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to delete alert notification", err)
+		return Error(500, "删除报警通知失败", err)
 	}
 
-	return Success("Notification deleted")
+	return Success("通知已删除")
 }
 
 //POST /api/alert-notifications/test
@@ -263,10 +263,10 @@ func NotificationTest(c *m.ReqContext, dto dtos.NotificationTestCommand) Respons
 		if err == m.ErrSmtpNotEnabled {
 			return Error(412, err.Error(), err)
 		}
-		return Error(500, "Failed to send alert notifications", err)
+		return Error(500, "发送报警通知失败", err)
 	}
 
-	return Success("Test notification sent")
+	return Success("测试报警通知")
 }
 
 //POST /api/alerts/:alertId/pause
@@ -276,16 +276,16 @@ func PauseAlert(c *m.ReqContext, dto dtos.PauseAlertCommand) Response {
 	query := m.GetAlertByIdQuery{Id: alertID}
 
 	if err := bus.Dispatch(&query); err != nil {
-		return Error(500, "Get Alert failed", err)
+		return Error(500, "获取报警失败", err)
 	}
 
 	guardian := guardian.New(query.Result.DashboardId, c.OrgId, c.SignedInUser)
 	if canEdit, err := guardian.CanEdit(); err != nil || !canEdit {
 		if err != nil {
-			return Error(500, "Error while checking permissions for Alert", err)
+			return Error(500, "检查报警权限出错", err)
 		}
 
-		return Error(403, "Access denied to this dashboard and alert", nil)
+		return Error(403, "禁止访问仪表盘和报警", nil)
 	}
 
 	cmd := m.PauseAlertCommand{
@@ -308,7 +308,7 @@ func PauseAlert(c *m.ReqContext, dto dtos.PauseAlertCommand) Response {
 	result := map[string]interface{}{
 		"alertId": alertID,
 		"state":   response,
-		"message": "Alert " + pausedState,
+		"message": "报警 " + pausedState,
 	}
 
 	return JSON(200, result)
@@ -321,7 +321,7 @@ func PauseAllAlerts(c *m.ReqContext, dto dtos.PauseAllAlertsCommand) Response {
 	}
 
 	if err := bus.Dispatch(&updateCmd); err != nil {
-		return Error(500, "Failed to pause alerts", err)
+		return Error(500, "暂停报警失败", err)
 	}
 
 	var response m.AlertStateType = m.AlertStatePending
@@ -333,7 +333,7 @@ func PauseAllAlerts(c *m.ReqContext, dto dtos.PauseAllAlertsCommand) Response {
 
 	result := map[string]interface{}{
 		"state":          response,
-		"message":        "alerts " + pausedState,
+		"message":        "报警 " + pausedState,
 		"alertsAffected": updateCmd.ResultCount,
 	}
 

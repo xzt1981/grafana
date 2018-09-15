@@ -34,7 +34,7 @@ function clipboardButton() {
       });
 
       scope.clipboard.on('success', () => {
-        appEvents.emit('alert-success', ['Content copied to clipboard']);
+        appEvents.emit('alert-success', ['已拷贝到剪贴板']);
       });
 
       scope.$on('$destroy', function() {

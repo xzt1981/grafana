@@ -11,7 +11,7 @@ func GetAPIKeys(c *m.ReqContext) Response {
 	query := m.GetApiKeysQuery{OrgId: c.OrgId}
 
 	if err := bus.Dispatch(&query); err != nil {
-		return Error(500, "Failed to list api keys", err)
+		return Error(500, "获取api keys列表失败", err)
 	}
 
 	result := make([]*m.ApiKeyDTO, len(query.Result))
@@ -33,15 +33,15 @@ func DeleteAPIKey(c *m.ReqContext) Response {
 
 	err := bus.Dispatch(cmd)
 	if err != nil {
-		return Error(500, "Failed to delete API key", err)
+		return Error(500, "删除API key失败", err)
 	}
 
-	return Success("API key deleted")
+	return Success("API key删除成功")
 }
 
 func AddAPIKey(c *m.ReqContext, cmd m.AddApiKeyCommand) Response {
 	if !cmd.Role.IsValid() {
-		return Error(400, "Invalid role specified", nil)
+		return Error(400, "角色无效", nil)
 	}
 
 	cmd.OrgId = c.OrgId
@@ -50,7 +50,7 @@ func AddAPIKey(c *m.ReqContext, cmd m.AddApiKeyCommand) Response {
 	cmd.Key = newKeyInfo.HashedKey
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to add API key", err)
+		return Error(500, "添加API key失败", err)
 	}
 
 	result := &dtos.NewApiKeyResult{

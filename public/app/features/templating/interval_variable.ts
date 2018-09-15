@@ -89,7 +89,7 @@ export class IntervalVariable implements Variable {
 }
 
 variableTypes['interval'] = {
-  name: 'Interval',
+  name: '时间窗变量',
   ctor: IntervalVariable,
-  description: 'Define a timespan interval (ex 1m, 1h, 1d)',
+  description: '定义一个时间段(比如 1分钟, 1小时, 1天)',
 };

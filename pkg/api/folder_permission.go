@@ -26,7 +26,7 @@ func GetFolderPermissionList(c *m.ReqContext) Response {
 
 	acl, err := g.GetAcl()
 	if err != nil {
-		return Error(500, "Failed to get folder permissions", err)
+		return Error(500, "获取文件夹权限失败", err)
 	}
 
 	for _, perm := range acl {
@@ -88,10 +88,10 @@ func UpdateFolderPermissions(c *m.ReqContext, apiCmd dtos.UpdateDashboardAclComm
 				return Error(400, err.Error(), err)
 			}
 
-			return Error(500, "Error while checking folder permissions", err)
+			return Error(500, "检查文件夹权限错误", err)
 		}
 
-		return Error(403, "Cannot remove own admin permission for a folder", nil)
+		return Error(403, "不能移除自己的管理权限", nil)
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
@@ -106,8 +106,8 @@ func UpdateFolderPermissions(c *m.ReqContext, apiCmd dtos.UpdateDashboardAclComm
 			return Error(409, err.Error(), err)
 		}
 
-		return Error(500, "Failed to create permission", err)
+		return Error(500, "创建权限失败", err)
 	}
 
-	return Success("Folder permissions updated")
+	return Success("文件夹权限已更新")
 }

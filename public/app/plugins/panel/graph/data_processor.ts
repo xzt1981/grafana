@@ -130,7 +130,7 @@ export class DataProcessor {
     let nameField = this.panel.xaxis.name;
     if (!nameField) {
       throw {
-        message: 'No field name specified to use for x-axis, check your axes settings',
+        message: '没有指定X-轴的字段名字，请检查X轴设置。',
       };
     }
     return [];
@@ -192,11 +192,11 @@ export class DataProcessor {
     switch (this.panel.xaxis.mode) {
       case 'series': {
         return [
-          { text: 'Avg', value: 'avg' },
-          { text: 'Min', value: 'min' },
-          { text: 'Max', value: 'max' },
-          { text: 'Total', value: 'total' },
-          { text: 'Count', value: 'count' },
+          { text: '平均', value: 'avg' },
+          { text: '最小', value: 'min' },
+          { text: '最大', value: 'max' },
+          { text: '总数', value: 'total' },
+          { text: '计数', value: 'count' },
         ];
       }
     }

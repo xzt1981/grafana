@@ -101,7 +101,7 @@ export class PanelCtrl {
 
   initEditMode() {
     this.editorTabs = [];
-    this.addEditorTab('General', 'public/app/partials/panelgeneral.html');
+    this.addEditorTab('常规', 'public/app/partials/panelgeneral.html');
     this.editModeInitiated = true;
     this.events.emit('init-edit-mode', null);
 
@@ -192,7 +192,7 @@ export class PanelCtrl {
     let menu = [];
     if (!this.fullscreen && this.dashboard.meta.canEdit) {
       menu.push({
-        text: '重复',
+        text: '克隆',
         click: 'ctrl.duplicate()',
         role: 'Editor',
         shortcut: 'p d',
@@ -272,7 +272,7 @@ export class PanelCtrl {
 
   copyPanel() {
     store.set(LS_PANEL_COPY_KEY, JSON.stringify(this.panel.getSaveModel()));
-    appEvents.emit('alert-success', ['Panel copied. Open Add Panel to paste']);
+    appEvents.emit('alert-success', ['面板已复制. 请在添加面板粘贴']);
   }
 
   replacePanel(newPanel, oldPanel) {

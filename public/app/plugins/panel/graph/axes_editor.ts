@@ -26,19 +26,19 @@ export class AxesEditorCtrl {
     };
 
     this.xAxisModes = {
-      Time: 'time',
-      Series: 'series',
-      Histogram: 'histogram',
+      Time: '时间',
+      Series: '序列',
+      Histogram: '直方图',
       // 'Data field': 'field',
     };
 
     this.xAxisStatOptions = [
-      { text: 'Avg', value: 'avg' },
-      { text: 'Min', value: 'min' },
-      { text: 'Max', value: 'max' },
-      { text: 'Total', value: 'total' },
-      { text: 'Count', value: 'count' },
-      { text: 'Current', value: 'current' },
+      { text: '平均', value: 'avg' },
+      { text: '最小', value: 'min' },
+      { text: '最大', value: 'max' },
+      { text: '总数', value: 'total' },
+      { text: '计数', value: 'count' },
+      { text: '当前', value: 'current' },
     ];
 
     if (this.panel.xaxis.mode === 'custom') {

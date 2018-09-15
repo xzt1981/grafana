@@ -17,11 +17,11 @@
         </div>
       </div>
       <div class="gf-form">
-        <label class="gf-form-label width-8">Y-Min</label>
+        <label class="gf-form-label width-8">Y-最小</label>
         <input type="text" class="gf-form-input width-12" placeholder="auto" empty-to-null ng-model="ctrl.panel.yAxis.min" ng-change="ctrl.render()" ng-model-onblur>
       </div>
       <div class="gf-form">
-        <label class="gf-form-label width-8">Y-Max</label>
+        <label class="gf-form-label width-8">Y-最大</label>
         <input type="text" class="gf-form-input width-12" placeholder="auto" empty-to-null ng-model="ctrl.panel.yAxis.max" ng-change="ctrl.render()" ng-model-onblur>
       </div>
     </div>
@@ -32,24 +32,24 @@
       ng-model="ctrl.panel.yAxis.decimals" ng-change="ctrl.render()" ng-model-onblur>
     </div>
     <div class="gf-form" ng-if="ctrl.panel.dataFormat == 'tsbuckets'">
-      <label class="gf-form-label width-8">Bucket bound</label>
+      <label class="gf-form-label width-8">桶界限</label>
       <div class="gf-form-select-wrapper max-width-12">
         <select class="gf-form-input"
           ng-model="ctrl.panel.yBucketBound" ng-options="v as k for (k, v) in editor.yBucketBoundModes" ng-change="ctrl.render()"
-          data-placement="right" bs-tooltip="'Use series label as an upper or lower bucket bound.'">
+          data-placement="right" bs-tooltip="'使用序列标签作为桶的上限或下限。'">
         </select>
       </div>
     </div>
   </div>
 
   <div class="section gf-form-group" ng-if="ctrl.panel.dataFormat == 'timeseries'">
-    <h5 class="section-heading">Buckets</h5>
+    <h5 class="section-heading">桶</h5>
     <div class="gf-form-inline">
       <div class="gf-form">
-        <label class="gf-form-label width-5">Y Axis</label>
+        <label class="gf-form-label width-5">Y 轴</label>
       </div>
       <div class="gf-form" ng-show="ctrl.panel.yAxis.logBase === 1">
-        <label class="gf-form-label width-5">Buckets</label>
+        <label class="gf-form-label width-5">桶</label>
         <input type="number" class="gf-form-input width-5" placeholder="auto" data-placement="right"
                                                                               bs-tooltip="'Number of buckets for Y axis.'"
                                                                               ng-model="ctrl.panel.yBucketNumber" ng-change="ctrl.refresh()" ng-model-onblur>
@@ -66,7 +66,7 @@
                class="gf-form-input width-9"
                placeholder="1"
                data-placement="right"
-               bs-tooltip="'For log scales only. By default Y values is splitted by integer powers of log base (1, 2, 4, 8, 16, ... for log2). This option allows to split each default bucket into specified number of buckets.'"
+               bs-tooltip="'仅适用于log比例， 默认Y轴是被以(1, 2, 4, 8, 16, ... for log2)为底的整数幂分开的。该选项允许分割每一个默认桶为指定的个数。'"
                ng-model="ctrl.panel.yAxis.splitFactor" ng-change="ctrl.refresh()" ng-model-onblur>
         </input>
       </div>
@@ -75,14 +75,14 @@
       <div class="gf-form">
         <label class="gf-form-label width-5">X 轴</label>
         <label class="gf-form-label width-5">序列桶</label>
-        <input type="number" class="gf-form-input width-5" placeholder="auto" data-placement="right"
-                                                                              bs-tooltip="'Number of buckets for X axis.'"
+        <input type="number" class="gf-form-input width-5" placeholder="自动" data-placement="right"
+                                                                              bs-tooltip="'X轴的桶数。'"
                                                                               ng-model="ctrl.panel.xBucketNumber" ng-change="ctrl.refresh()" ng-model-onblur>
       </div>
       <div class="gf-form">
         <label class="gf-form-label width-4">序列桶大小</label>
-        <input type="text" class="gf-form-input width-5" placeholder="auto" data-placement="right"
-                                                                            bs-tooltip="'Size of bucket. Number or interval (10s, 5m, 1h, etc). Supported intervals: ms, s, m, h, d, w, M, y. Has priority over Buckets option.'"
+        <input type="text" class="gf-form-input width-5" placeholder="自动" data-placement="right"
+                                                                            bs-tooltip="'桶大小， 数值或者间隔 (10s, 5m, 1h, etc). 支持的的时间单位: ms, s, m, h, d, w, M, y. 优先于桶的选项'"
                                                                             ng-model="ctrl.panel.xBucketSize" ng-change="ctrl.refresh()" ng-model-onblur>
       </div>
     </div>
@@ -94,7 +94,7 @@
       <label class="gf-form-label width-5">格式</label>
       <div class="gf-form-select-wrapper max-width-15">
         <select class="gf-form-input" ng-model="ctrl.panel.dataFormat" ng-options="v as k for (k, v) in editor.dataFormats" ng-change="ctrl.render()"
-          data-placement="right" bs-tooltip="'时间序列: 根据常规时间序列生成热点图。 <br>时间序列桶: use histogram data returned from data source. Each series represents bucket which upper/lower bound is a series label.'">
+          data-placement="right" bs-tooltip="'时间序列: 根据常规时间序列生成热点图。 <br>时间序列桶: 使用数据源返回的直方图数据，每一个代表桶上限/下限的序列就是序列标签。'">
         </select>
       </div>
     </div>

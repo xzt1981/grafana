@@ -25,7 +25,7 @@
 			<i class="fa" ng-class="{'fa-star-o': !ctrl.dashboard.meta.isStarred, 'fa-star': ctrl.dashboard.meta.isStarred}"></i>
 		</button>
 
-		<button class="btn navbar-button navbar-button--share" ng-show="::ctrl.dashboard.meta.canShare" ng-click="ctrl.shareDashboard(0)" bs-tooltip="'Share dashboard'" data-placement="bottom">
+		<button class="btn navbar-button navbar-button--share" ng-show="::ctrl.dashboard.meta.canShare" ng-click="ctrl.shareDashboard(0)" bs-tooltip="'分享仪表盘'" data-placement="bottom">
 			<i class="fa fa-share-square-o"></i></a>
 		</button>
 
@@ -33,7 +33,7 @@
 			<i class="fa fa-save"></i>
 		</button>
 
-		<a class="btn navbar-button navbar-button--snapshot-origin" ng-if="::ctrl.dashboard.snapshot.originalUrl" href="{{ctrl.dashboard.snapshot.originalUrl}}" bs-tooltip="'打开最初仪表盘'" data-placement="bottom">
+		<a class="btn navbar-button navbar-button--snapshot-origin" ng-if="::ctrl.dashboard.snapshot.originalUrl" href="{{ctrl.dashboard.snapshot.originalUrl}}" bs-tooltip="'打开原来的仪表盘'" data-placement="bottom">
 			<i class="fa fa-link"></i>
 		</a>
 

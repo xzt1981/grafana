@@ -59,7 +59,7 @@ export class AddPanelPanel extends React.Component<AddPanelPanelProps, AddPanelP
       .value();
 
     // add special row type
-    panels.push({ id: 'row', name: 'Row', sort: 8, info: { logos: { small: 'public/img/icn-row.svg' } } });
+    panels.push({ id: 'row', name: '行', sort: 8, info: { logos: { small: 'public/img/icn-row.svg' } } });
 
     panels = this.filterPanels(panels, filter);
 
@@ -99,12 +99,12 @@ export class AddPanelPanel extends React.Component<AddPanelPanelProps, AddPanelP
 
     var newPanel: any = {
       type: panelPluginInfo.id,
-      title: 'Panel Title',
+      title: '面板标题',
       gridPos: { x: gridPos.x, y: gridPos.y, w: gridPos.w, h: gridPos.h },
     };
 
     if (panelPluginInfo.id === 'row') {
-      newPanel.title = '行图标题';
+      newPanel.title = '行标题';
       newPanel.gridPos = { x: 0, y: 0 };
     }
 

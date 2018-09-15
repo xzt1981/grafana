@@ -111,7 +111,7 @@ export function restore(version, restoredFrom?) {
                 thresholds: [],
                 timeFrom: null,
                 timeShift: null,
-                title: 'Panel Title',
+                title: '面板标题',
                 tooltip: {
                   shared: true,
                   sort: 0,
@@ -148,7 +148,7 @@ export function restore(version, restoredFrom?) {
             repeatIteration: null,
             repeatRowId: null,
             showTitle: false,
-            title: 'Dashboard Row',
+            title: '仪表盘行',
             titleSize: 'h6',
           },
         ],
@@ -167,11 +167,11 @@ export function restore(version, restoredFrom?) {
           time_options: ['5m', '15m', '1h', '6h', '12h', '24h', '2d', '7d', '30d'],
         },
         timezone: 'utc',
-        title: 'History Dashboard',
+        title: '历史仪表盘',
         version: version,
       },
     },
-    message: 'Dashboard restored to version ' + version,
+    message: '仪表盘恢复到版本 ' + version,
     version: version,
   };
 }

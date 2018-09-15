@@ -232,11 +232,11 @@
             "stateFilter": [
               "alerting"
             ],
-            "title": "Alert status",
+            "title": "报警状态",
             "type": "alertlist"
           }
         ],
-        "title": "Row"
+        "title": "行"
       }
     ],
     "time": {

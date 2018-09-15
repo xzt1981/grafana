@@ -33,21 +33,21 @@ func GenStateString() string {
 
 func OAuthLogin(ctx *m.ReqContext) {
 	if setting.OAuthService == nil {
-		ctx.Handle(404, "OAuth not enabled", nil)
+		ctx.Handle(404, "OAuth已禁用", nil)
 		return
 	}
 
 	name := ctx.Params(":name")
 	connect, ok := social.SocialMap[name]
 	if !ok {
-		ctx.Handle(404, fmt.Sprintf("No OAuth with name %s configured", name), nil)
+		ctx.Handle(404, fmt.Sprintf("没有配置OAuth：%s", name), nil)
 		return
 	}
 
 	errorParam := ctx.Query("error")
 	if errorParam != "" {
 		errorDesc := ctx.Query("error_description")
-		oauthLogger.Error("failed to login ", "error", errorParam, "errorDesc", errorDesc)
+		oauthLogger.Error("登录失败", "error", errorParam, "errorDesc", errorDesc)
 		redirectWithError(ctx, login.ErrProviderDeniedRequest, "error", errorParam, "errorDesc", errorDesc)
 		return
 	}
@@ -90,7 +90,7 @@ func OAuthLogin(ctx *m.ReqContext) {
 	if setting.OAuthService.OAuthInfos[name].TlsClientCert != "" || setting.OAuthService.OAuthInfos[name].TlsClientKey != "" {
 		cert, err := tls.LoadX509KeyPair(setting.OAuthService.OAuthInfos[name].TlsClientCert, setting.OAuthService.OAuthInfos[name].TlsClientKey)
 		if err != nil {
-			ctx.Logger.Error("Failed to setup TlsClientCert", "oauth", name, "error", err)
+			ctx.Logger.Error("安装Tls证书失败", "oauth", name, "error", err)
 			ctx.Handle(500, "login.OAuthLogin(Failed to setup TlsClientCert)", nil)
 			return
 		}
@@ -101,7 +101,7 @@ func OAuthLogin(ctx *m.ReqContext) {
 	if setting.OAuthService.OAuthInfos[name].TlsClientCa != "" {
 		caCert, err := ioutil.ReadFile(setting.OAuthService.OAuthInfos[name].TlsClientCa)
 		if err != nil {
-			ctx.Logger.Error("Failed to setup TlsClientCa", "oauth", name, "error", err)
+			ctx.Logger.Error("安装Tls客户端认证失败", "oauth", name, "error", err)
 			ctx.Handle(500, "login.OAuthLogin(Failed to setup TlsClientCa)", nil)
 			return
 		}

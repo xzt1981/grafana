@@ -5,7 +5,7 @@ import moment from 'moment';
 describe('rangeUtil', () => {
   describe('Can get range grouped list of ranges', () => {
     it('when custom settings should return default range list', () => {
-      var groups = rangeUtil.getRelativeTimesList({ time_options: [] }, 'Last 5 minutes');
+      var groups = rangeUtil.getRelativeTimesList({ time_options: [] }, '最近5分钟');
       expect(_.keys(groups).length).toBe(4);
       expect(groups[3][0].active).toBe(true);
     });
@@ -14,52 +14,52 @@ describe('rangeUtil', () => {
   describe('Can get range text described', () => {
     it('should handle simple old expression with only amount and unit', () => {
       var info = rangeUtil.describeTextRange('5m');
-      expect(info.display).toBe('Last 5 minutes');
+      expect(info.display).toBe('最近5分钟');
     });
 
     it('should have singular when amount is 1', () => {
       var info = rangeUtil.describeTextRange('1h');
-      expect(info.display).toBe('Last 1 hour');
+      expect(info.display).toBe('最近1小时');
     });
 
     it('should handle non default amount', () => {
       var info = rangeUtil.describeTextRange('13h');
-      expect(info.display).toBe('Last 13 hours');
+      expect(info.display).toBe('最近3小时');
       expect(info.from).toBe('now-13h');
     });
 
     it('should handle non default future amount', () => {
       var info = rangeUtil.describeTextRange('+3h');
-      expect(info.display).toBe('Next 3 hours');
+      expect(info.display).toBe('未来3小时');
       expect(info.from).toBe('now');
       expect(info.to).toBe('now+3h');
     });
 
     it('should handle now/d', () => {
       var info = rangeUtil.describeTextRange('now/d');
-      expect(info.display).toBe('Today so far');
+      expect(info.display).toBe('截止到今天');
     });
 
     it('should handle now/w', () => {
       var info = rangeUtil.describeTextRange('now/w');
-      expect(info.display).toBe('This week so far');
+      expect(info.display).toBe('截止到这周');
     });
 
     it('should handle now/M', () => {
       var info = rangeUtil.describeTextRange('now/M');
-      expect(info.display).toBe('This month so far');
+      expect(info.display).toBe('截止到这个月');
     });
 
     it('should handle now/y', () => {
       var info = rangeUtil.describeTextRange('now/y');
-      expect(info.display).toBe('This year so far');
+      expect(info.display).toBe('截止到今年');
     });
   });
 
   describe('Can get date range described', () => {
     it('Date range with simple ranges', () => {
       var text = rangeUtil.describeTimeRange({ from: 'now-1h', to: 'now' });
-      expect(text).toBe('Last 1 hour');
+      expect(text).toBe('最近1小时');
     });
 
     it('Date range with rounding ranges', () => {

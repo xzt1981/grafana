@@ -68,7 +68,7 @@
                   ng-if="ctrl.revisions.length > 1"
                   ng-disabled="!ctrl.canCompare"
                   ng-click="ctrl.getDiff(ctrl.diff)"
-                  bs-tooltip="ctrl.canCompare ? '' : 'Select 2 versions to start comparing'" data-placement="bottom">
+                  bs-tooltip="ctrl.canCompare ? '' : '选择两个版本来比较'" data-placement="bottom">
             <i class="fa fa-code-fork" ></i>&nbsp;&nbsp;比较版本
           </button>
         </div>
@@ -80,7 +80,7 @@
 <div ng-if="ctrl.mode === 'compare'">
   <div ng-if="ctrl.loading">
     <i class="fa fa-spinner fa-spin"></i>
-    <em>获取改变&hellip;</em>
+    <em>获取变更&hellip;</em>
   </div>
 
   <div ng-if="!ctrl.loading">

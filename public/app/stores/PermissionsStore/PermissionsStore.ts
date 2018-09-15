@@ -2,17 +2,17 @@ import { types, getEnv, flow } from 'mobx-state-tree';
 import { PermissionsStoreItem } from './PermissionsStoreItem';
 
 export const permissionOptions = [
-  { value: 1, label: 'View', description: 'Can view dashboards.' },
-  { value: 2, label: 'Edit', description: 'Can add, edit and delete dashboards.' },
+  { value: 1, label: '视图', description: '可查看仪表盘.' },
+  { value: 2, label: '编辑', description: '可添加、编辑和删除仪表盘.' },
   {
     value: 4,
-    label: 'Admin',
-    description: 'Can add/remove permissions and can add, edit and delete dashboards.',
+    label: '管理员',
+    description: '可添加/删除权限，也可以添加，编辑和删除仪表盘.',
   },
 ];
 
 export const aclTypeValues = {
-  GROUP: { value: 'Group', text: '工作组' },
+  GROUP: { value: 'Group', text: '用户组' },
   USER: { value: 'User', text: '用户' },
   VIEWER: { value: 'Viewer', text: '每个拥有观察者角色的人' },
   EDITOR: { value: 'Editor', text: '每个拥有编辑角色的人' },

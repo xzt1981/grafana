@@ -28,10 +28,10 @@ export class DashboardSrv {
       err.isHandled = true;
 
       this.$rootScope.appEvent('confirm-modal', {
-        title: 'Conflict',
-        text: 'Someone else has updated this dashboard.',
-        text2: 'Would you still like to save this dashboard?',
-        yesText: 'Save & Overwrite',
+        title: '保存冲突',
+        text: '该仪表盘已被他人修改。',
+        text2: '仍然要保存吗?',
+        yesText: '保存 & 覆盖',
         icon: 'fa-warning',
         onConfirm: () => {
           this.save(clone, options);
@@ -43,10 +43,10 @@ export class DashboardSrv {
       err.isHandled = true;
 
       this.$rootScope.appEvent('confirm-modal', {
-        title: 'Conflict',
-        text: 'A dashboard with the same name in selected folder already exists.',
-        text2: 'Would you still like to save this dashboard?',
-        yesText: 'Save & Overwrite',
+        title: '命名冲突',
+        text: '选择的文件夹中已存在同名仪表盘。',
+        text2: '仍然要保存该仪表盘吗?',
+        yesText: '保存 & 覆盖',
         icon: 'fa-warning',
         onConfirm: () => {
           this.save(clone, options);
@@ -58,12 +58,12 @@ export class DashboardSrv {
       err.isHandled = true;
 
       this.$rootScope.appEvent('confirm-modal', {
-        title: 'Plugin Dashboard',
+        title: '仪表盘插件',
         text: err.data.message,
-        text2: 'Your changes will be lost when you update the plugin. Use Save As to create custom version.',
-        yesText: 'Overwrite',
+        text2: '在更新插件时修改会丢失，请将其另存为自定义版本。',
+        yesText: '覆盖',
         icon: 'fa-warning',
-        altActionText: 'Save As',
+        altActionText: '另存为',
         onAltAction: () => {
           this.showSaveAsModal();
         },
@@ -85,7 +85,7 @@ export class DashboardSrv {
     }
 
     this.$rootScope.appEvent('dashboard-saved', this.dash);
-    this.$rootScope.appEvent('alert-success', ['Dashboard saved']);
+    this.$rootScope.appEvent('alert-success', ['仪表盘已保存']);
 
     return this.dash;
   }

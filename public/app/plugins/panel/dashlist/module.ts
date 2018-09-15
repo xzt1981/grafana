@@ -41,16 +41,16 @@ class DashListCtrl extends PanelCtrl {
 
     // update capability
     if (this.panel.mode) {
-      if (this.panel.mode === 'starred') {
+      if (this.panel.mode === '已标记') {
         this.panel.starred = true;
         this.panel.headings = false;
       }
-      if (this.panel.mode === 'recently viewed') {
+      if (this.panel.mode === '最近浏览过') {
         this.panel.recent = true;
         this.panel.starred = false;
         this.panel.headings = false;
       }
-      if (this.panel.mode === 'search') {
+      if (this.panel.mode === '搜索') {
         this.panel.search = true;
         this.panel.starred = false;
         this.panel.headings = false;
@@ -61,8 +61,8 @@ class DashListCtrl extends PanelCtrl {
 
   onInitEditMode() {
     this.editorTabIndex = 1;
-    this.modes = ['starred', 'search', 'recently viewed'];
-    this.addEditorTab('Options', 'public/app/plugins/panel/dashlist/editor.html');
+    this.modes = ['已标记', '搜索', '最近浏览过'];
+    this.addEditorTab('选项', 'public/app/plugins/panel/dashlist/editor.html');
   }
 
   onRefresh() {

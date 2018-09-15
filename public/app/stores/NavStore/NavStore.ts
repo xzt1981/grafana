@@ -79,7 +79,7 @@ export const NavStore = types
 
     initDatasourceEditNav(ds: any, plugin: any, currentPage: string) {
       let title = '新建';
-      let subTitle = `Type: ${plugin.name}`;
+      let subTitle = `类型: ${plugin.name}`;
 
       if (ds.id) {
         title = ds.name;
@@ -91,7 +91,7 @@ export const NavStore = types
         subTitle: subTitle,
         url: '',
         text: title,
-        breadcrumbs: [{ title: 'Data Sources', url: 'datasources' }],
+        breadcrumbs: [{ title: '数据源', url: 'datasources' }],
         children: [
           {
             active: currentPage === 'datasource-settings',

@@ -19,7 +19,7 @@ func GetPluginList(c *m.ReqContext) Response {
 	pluginSettingsMap, err := plugins.GetPluginSettings(c.OrgId)
 
 	if err != nil {
-		return Error(500, "Failed to get list of plugins", err)
+		return Error(500, "获取插件列表失败", err)
 	}
 
 	result := make(dtos.PluginList, 0)
@@ -83,7 +83,7 @@ func GetPluginSettingByID(c *m.ReqContext) Response {
 
 	def, exists := plugins.Plugins[pluginID]
 	if !exists {
-		return Error(404, "Plugin not found, no installed plugin with that id", nil)
+		return Error(404, "插件未找到, 没有安装这个ID的插件", nil)
 	}
 
 	dto := &dtos.PluginSetting{
@@ -104,7 +104,7 @@ func GetPluginSettingByID(c *m.ReqContext) Response {
 	query := m.GetPluginSettingByIdQuery{PluginId: pluginID, OrgId: c.OrgId}
 	if err := bus.Dispatch(&query); err != nil {
 		if err != m.ErrPluginSettingNotFound {
-			return Error(500, "Failed to get login settings", nil)
+			return Error(500, "获取登录设置失败", nil)
 		}
 	} else {
 		dto.Enabled = query.Result.Enabled
@@ -122,14 +122,14 @@ func UpdatePluginSetting(c *m.ReqContext, cmd m.UpdatePluginSettingCmd) Response
 	cmd.PluginId = pluginID
 
 	if _, ok := plugins.Apps[cmd.PluginId]; !ok {
-		return Error(404, "Plugin not installed.", nil)
+		return Error(404, "插件未安装", nil)
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to update plugin setting", err)
+		return Error(500, "更新插件设置失败", err)
 	}
 
-	return Success("Plugin settings updated")
+	return Success("插件设置更新成功")
 }
 
 func GetPluginDashboards(c *m.ReqContext) Response {
@@ -141,7 +141,7 @@ func GetPluginDashboards(c *m.ReqContext) Response {
 			return Error(404, notfound.Error(), nil)
 		}
 
-		return Error(500, "Failed to get plugin dashboards", err)
+		return Error(500, "获取插件仪表盘失败", err)
 	}
 
 	return JSON(200, list)
@@ -157,7 +157,7 @@ func GetPluginMarkdown(c *m.ReqContext) Response {
 			return Error(404, notfound.Error(), nil)
 		}
 
-		return Error(500, "Could not get markdown file", err)
+		return Error(500, "未能获取markdown文件", err)
 	}
 
 	resp := Respond(200, content)
@@ -179,7 +179,7 @@ func ImportDashboard(c *m.ReqContext, apiCmd dtos.ImportDashboardCommand) Respon
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to import dashboard", err)
+		return Error(500, "导入仪表盘失败", err)
 	}
 
 	return JSON(200, cmd.Result)

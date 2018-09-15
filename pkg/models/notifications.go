@@ -2,8 +2,8 @@ package models
 
 import "errors"
 
-var ErrInvalidEmailCode = errors.New("Invalid or expired email code")
-var ErrSmtpNotEnabled = errors.New("SMTP not configured, check your grafana.ini config file's [smtp] section.")
+var ErrInvalidEmailCode = errors.New("无效或者过期的邮箱验证码")
+var ErrSmtpNotEnabled = errors.New("SMTP没有配置, 请检查配置文件中的[smtp]段。")
 
 type SendEmailCommand struct {
 	To           []string

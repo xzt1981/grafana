@@ -6,10 +6,10 @@
 			<input type="text" class="gf-form-input width-25" ng-model='ctrl.panel.title'></input>
 		</div>
 		<div class="gf-form gf-form--v-stretch">
-			<span class="gf-form-label width-7">简介</span>
-			<textarea class="gf-form-input width-25" rows="3" ng-model="ctrl.panel.description"  placeholder="Panel description, supports markdown & links"></textarea>
+			<span class="gf-form-label width-7">描述</span>
+			<textarea class="gf-form-input width-25" rows="3" ng-model="ctrl.panel.description"  placeholder="面板描述，支持markdown & 链接"></textarea>
 		</div>
-    <gf-form-switch class="gf-form" label-class="width-7" switch-class="max-width-6" label="Transparent" checked="ctrl.panel.transparent" on-change="ctrl.render()"></gf-form-switch>
+    <gf-form-switch class="gf-form" label-class="width-7" switch-class="max-width-6" label="透明" checked="ctrl.panel.transparent" on-change="ctrl.render()"></gf-form-switch>
 	</div>
 
   <div class="section gf-form-group">
@@ -26,7 +26,7 @@
 		</div>
     <div class="gf-form" ng-show="ctrl.panel.repeat">
 			<span class="gf-form-label width-9">方向</span>
-			<select class="gf-form-input" ng-model="ctrl.panel.repeatDirection" ng-options="f.value as f.text for f in [{value: 'v', text: 'Vertical'}, {value: 'h', text: 'Horizontal'}]">
+			<select class="gf-form-input" ng-model="ctrl.panel.repeatDirection" ng-options="f.value as f.text for f in [{value: 'v', text: '纵向'}, {value: 'h', text: '横向'}]">
 				<option value=""></option>
 			</select>
 		</div>

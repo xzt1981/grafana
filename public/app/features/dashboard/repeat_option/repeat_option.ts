@@ -24,12 +24,12 @@ function dashRepeatOptionDirective(variableSrv) {
 
       if (scope.variables.length === 0) {
         scope.variables.unshift({
-          text: 'No template variables found',
+          text: '没有找到模板变量',
           value: null,
         });
       }
 
-      scope.variables.unshift({ text: 'Disabled', value: null });
+      scope.variables.unshift({ text: '禁用', value: null });
 
       // if repeat is set and no direction set to horizontal
       if (scope.panel.repeat && !scope.panel.repeatDirection) {

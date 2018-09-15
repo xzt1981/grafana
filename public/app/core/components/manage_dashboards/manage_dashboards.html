@@ -36,7 +36,7 @@
       <div class="gf-form" ng-show="ctrl.query.starred">
         <label class="gf-form-label">
           <a class="pointer" ng-click="ctrl.removeStarred()">
-            <i class="fa fa-fw fa-check"></i> Starred
+            <i class="fa fa-fw fa-check"></i> 已标记
           </a>
         </label>
       </div>
@@ -93,13 +93,13 @@
             ng-click="ctrl.moveTo()"
             bs-tooltip="ctrl.canMove ? '' : 'Select a dashboard to move (cannot move folders)'"
             data-placement="bottom">
-          <i class="fa fa-exchange"></i>&nbsp;&nbsp;Move
+          <i class="fa fa-exchange"></i>&nbsp;&nbsp;移动
           </button>
           <button type="button"
             class="btn gf-form-button btn-danger"
             ng-click="ctrl.delete()"
             ng-disabled="!ctrl.canDelete">
-            <i class="fa fa-trash"></i>&nbsp;&nbsp;Delete
+            <i class="fa fa-trash"></i>&nbsp;&nbsp;删除
           </button>
         </div>
       </div>
@@ -118,7 +118,7 @@
 
 <div ng-if="ctrl.canSave && ctrl.folderId && !ctrl.hasFilters && ctrl.sections.length === 0">
   <empty-list-cta model="{
-    title: '该文件加还没有仪表盘',
+    title: '该文件夹还没有添加仪表盘',
     buttonIcon: 'gicon gicon-dashboard-new',
     buttonLink: 'dashboard/new?folderId={{ctrl.folderId}}',
     buttonTitle: '创建仪表盘',

@@ -49,7 +49,7 @@ func getFrontendSettingsMap(c *m.ReqContext) (map[string]interface{}, error) {
 
 		meta, exists := enabledPlugins.DataSources[ds.Type]
 		if !exists {
-			log.Error(3, "Could not find plugin definition for data source: %v", ds.Type)
+			log.Error(3, "没有找到数据源 %v 的插件定义", ds.Type)
 			continue
 		}
 
@@ -184,7 +184,7 @@ func getPanelSort(id string) int {
 func GetFrontendSettings(c *m.ReqContext) {
 	settings, err := getFrontendSettingsMap(c)
 	if err != nil {
-		c.JsonApiErr(400, "Failed to get frontend settings", err)
+		c.JsonApiErr(400, "获取前端设置失败", err)
 		return
 	}
 

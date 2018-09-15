@@ -43,7 +43,7 @@ func AdminGetStats(c *m.ReqContext) {
 	statsQuery := m.GetAdminStatsQuery{}
 
 	if err := bus.Dispatch(&statsQuery); err != nil {
-		c.JsonApiErr(500, "Failed to get admin stats from database", err)
+		c.JsonApiErr(500, "获取管理员状态失败", err)
 		return
 	}
 

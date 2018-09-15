@@ -11,7 +11,7 @@ export const SearchStore = types
         self.sections.push(
           SearchResultSection.create({
             id: 'starred' + i,
-            title: 'starred',
+            title: '已收藏',
             icon: 'fa fa-fw fa-star-o',
             expanded: false,
             items: [],

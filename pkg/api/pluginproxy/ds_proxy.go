@@ -82,7 +82,7 @@ func (proxy *DataSourceProxy) HandleRequest() {
 	var err error
 	reverseProxy.Transport, err = proxy.ds.GetHttpTransport()
 	if err != nil {
-		proxy.ctx.JsonApiErr(400, "Unable to load TLS certificate", err)
+		proxy.ctx.JsonApiErr(400, "无法加载TLS证书", err)
 		return
 	}
 

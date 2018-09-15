@@ -15,7 +15,7 @@ var alertQueryDef = new QueryPartDef({
   defaultParams: ['#A', '15m', 'now', 'avg'],
 });
 
-var conditionTypes = [{ text: 'Query', value: 'query' }];
+var conditionTypes = [{ text: '查询', value: 'query' }];
 
 var alertStateSortScore = {
   alerting: 1,
@@ -26,14 +26,14 @@ var alertStateSortScore = {
 };
 
 var evalFunctions = [
-  { text: 'IS ABOVE', value: 'gt' },
-  { text: 'IS BELOW', value: 'lt' },
-  { text: 'IS OUTSIDE RANGE', value: 'outside_range' },
-  { text: 'IS WITHIN RANGE', value: 'within_range' },
-  { text: 'HAS NO VALUE', value: 'no_value' },
+  { text: '大于', value: 'gt' },
+  { text: '小于', value: 'lt' },
+  { text: '范围之外', value: 'outside_range' },
+  { text: '范围之内', value: 'within_range' },
+  { text: '空值', value: 'no_value' },
 ];
 
-var evalOperators = [{ text: 'OR', value: 'or' }, { text: 'AND', value: 'and' }];
+var evalOperators = [{ text: '或', value: 'or' }, { text: '与', value: 'and' }];
 
 var reducerTypes = [
   { text: 'avg()', value: 'avg' },
@@ -49,13 +49,13 @@ var reducerTypes = [
 ];
 
 var noDataModes = [
-  { text: 'Alerting', value: 'alerting' },
-  { text: 'No Data', value: 'no_data' },
-  { text: 'Keep Last State', value: 'keep_state' },
-  { text: 'Ok', value: 'ok' },
+  { text: '报警', value: 'alerting' },
+  { text: '没有数据', value: 'no_data' },
+  { text: '保持最近状态', value: 'keep_state' },
+  { text: '好', value: 'ok' },
 ];
 
-var executionErrorModes = [{ text: 'Alerting', value: 'alerting' }, { text: 'Keep Last State', value: 'keep_state' }];
+var executionErrorModes = [{ text: '报警', value: 'alerting' }, { text: '保持最近状态', value: 'keep_state' }];
 
 function createReducerPart(model) {
   var def = new QueryPartDef({ type: model.type, defaultParams: [] });
@@ -66,42 +66,42 @@ function getStateDisplayModel(state) {
   switch (state) {
     case 'ok': {
       return {
-        text: 'OK',
+        text: '好',
         iconClass: 'icon-gf icon-gf-online',
         stateClass: 'alert-state-ok',
       };
     }
     case 'alerting': {
       return {
-        text: 'ALERTING',
+        text: '报警',
         iconClass: 'icon-gf icon-gf-critical',
         stateClass: 'alert-state-critical',
       };
     }
     case 'no_data': {
       return {
-        text: 'NO DATA',
+        text: '没有数值',
         iconClass: 'fa fa-question',
         stateClass: 'alert-state-warning',
       };
     }
     case 'paused': {
       return {
-        text: 'PAUSED',
+        text: '暂停',
         iconClass: 'fa fa-pause',
         stateClass: 'alert-state-paused',
       };
     }
     case 'pending': {
       return {
-        text: 'PENDING',
+        text: '挂起',
         iconClass: 'fa fa-exclamation',
         stateClass: 'alert-state-warning',
       };
     }
   }
 
-  throw { message: 'Unknown alert state' };
+  throw { message: '未知报警' };
 }
 
 function joinEvalMatches(matches, separator: string) {

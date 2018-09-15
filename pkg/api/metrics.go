@@ -17,17 +17,17 @@ func QueryMetrics(c *m.ReqContext, reqDto dtos.MetricRequest) Response {
 	timeRange := tsdb.NewTimeRange(reqDto.From, reqDto.To)
 
 	if len(reqDto.Queries) == 0 {
-		return Error(400, "No queries found in query", nil)
+		return Error(400, "没有找到查询项", nil)
 	}
 
 	dsID, err := reqDto.Queries[0].Get("datasourceId").Int64()
 	if err != nil {
-		return Error(400, "Query missing datasourceId", nil)
+		return Error(400, "数据源ID丢失", nil)
 	}
 
 	dsQuery := m.GetDataSourceByIdQuery{Id: dsID, OrgId: c.OrgId}
 	if err := bus.Dispatch(&dsQuery); err != nil {
-		return Error(500, "failed to fetch data source", err)
+		return Error(500, "获取数据源失败", err)
 	}
 
 	request := &tsdb.TsdbQuery{TimeRange: timeRange}
@@ -44,7 +44,7 @@ func QueryMetrics(c *m.ReqContext, reqDto dtos.MetricRequest) Response {
 
 	resp, err := tsdb.HandleRequest(context.Background(), dsQuery.Result, request)
 	if err != nil {
-		return Error(500, "Metric request error", err)
+		return Error(500, "度量请求失败", err)
 	}
 
 	statusCode := 200
@@ -84,10 +84,10 @@ func GenerateError(c *m.ReqContext) Response {
 // GET /api/tsdb/testdata/gensql
 func GenerateSQLTestData(c *m.ReqContext) Response {
 	if err := bus.Dispatch(&m.InsertSqlTestDataCommand{}); err != nil {
-		return Error(500, "Failed to insert test data", err)
+		return Error(500, "插入测试数据失败", err)
 	}
 
-	return JSON(200, &util.DynMap{"message": "OK"})
+	return JSON(200, &util.DynMap{"message": "确定"})
 }
 
 // GET /api/tsdb/testdata/random-walk
@@ -111,7 +111,7 @@ func GetTestDataRandomWalk(c *m.ReqContext) Response {
 
 	resp, err := tsdb.HandleRequest(context.Background(), dsInfo, request)
 	if err != nil {
-		return Error(500, "Metric request error", err)
+		return Error(500, "度量请求失败", err)
 	}
 
 	return JSON(200, &resp)

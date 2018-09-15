@@ -29,18 +29,18 @@ func AddTeamMember(c *m.ReqContext, cmd m.AddTeamMemberCommand) Response {
 
 	if err := bus.Dispatch(&cmd); err != nil {
 		if err == m.ErrTeamNotFound {
-			return Error(404, "没有找到工作组", nil)
+			return Error(404, "没有找到用户组", nil)
 		}
 
 		if err == m.ErrTeamMemberAlreadyAdded {
-			return Error(400, "用户已经添加到了该组", nil)
+			return Error(400, "用户已经存在", nil)
 		}
 
-		return Error(500, "添加用户到该组失败", err)
+		return Error(500, "添加用户失败", err)
 	}
 
 	return JSON(200, &util.DynMap{
-		"message": "添加到工作组的用户",
+		"message": "添加到用户组的用户",
 	})
 }
 
@@ -48,14 +48,14 @@ func AddTeamMember(c *m.ReqContext, cmd m.AddTeamMemberCommand) Response {
 func RemoveTeamMember(c *m.ReqContext) Response {
 	if err := bus.Dispatch(&m.RemoveTeamMemberCommand{OrgId: c.OrgId, TeamId: c.ParamsInt64(":teamId"), UserId: c.ParamsInt64(":userId")}); err != nil {
 		if err == m.ErrTeamNotFound {
-			return Error(404, "没有找到工作组", nil)
+			return Error(404, "没有找到用户组", nil)
 		}
 
 		if err == m.ErrTeamMemberNotFound {
 			return Error(404, "没有找到组员", nil)
 		}
 
-		return Error(500, "移除组员失败", err)
+		return Error(500, "删除组员失败", err)
 	}
-	return Success("组员已经移除")
+	return Success("组员已被删除")
 }

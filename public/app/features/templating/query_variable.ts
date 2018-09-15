@@ -3,7 +3,7 @@ import kbn from 'app/core/utils/kbn';
 import { Variable, containsVariable, assignModelProperties, variableTypes } from './variable';
 
 function getNoneOption() {
-  return { text: 'None', value: '', isNone: true };
+  return { text: '无', value: '', isNone: true };
 }
 
 export class QueryVariable implements Variable {
@@ -218,8 +218,8 @@ export class QueryVariable implements Variable {
 }
 
 variableTypes['query'] = {
-  name: 'Query',
+  name: '查询变量',
   ctor: QueryVariable,
-  description: 'Variable values are fetched from a datasource query',
+  description: '变量值是从数据源中查询得到的。',
   supportsMulti: true,
 };

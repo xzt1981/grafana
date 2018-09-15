@@ -11,10 +11,10 @@ import (
 
 var (
 	NotFound = func() Response {
-		return Error(404, "Not found", nil)
+		return Error(404, "没有找到", nil)
 	}
 	ServerError = func(err error) Response {
-		return Error(500, "Server error", err)
+		return Error(500, "服务器错误", err)
 	}
 )
 
@@ -90,9 +90,9 @@ func Error(status int, message string, err error) *NormalResponse {
 
 	switch status {
 	case 404:
-		data["message"] = "Not Found"
+		data["message"] = "没有找到"
 	case 500:
-		data["message"] = "Internal Server Error"
+		data["message"] = "服务器内部错误"
 	}
 
 	if message != "" {

@@ -25,7 +25,7 @@ func getUserUserProfile(userID int64) Response {
 		if err == m.ErrUserNotFound {
 			return Error(404, m.ErrUserNotFound.Error(), nil)
 		}
-		return Error(500, "Failed to get user", err)
+		return Error(500, "获取用户失败", err)
 	}
 
 	return JSON(200, query.Result)
@@ -38,7 +38,7 @@ func GetUserByLoginOrEmail(c *m.ReqContext) Response {
 		if err == m.ErrUserNotFound {
 			return Error(404, m.ErrUserNotFound.Error(), nil)
 		}
-		return Error(500, "Failed to get user", err)
+		return Error(500, "获取用户失败", err)
 	}
 	user := query.Result
 	result := m.UserProfileDTO{
@@ -57,10 +57,10 @@ func GetUserByLoginOrEmail(c *m.ReqContext) Response {
 func UpdateSignedInUser(c *m.ReqContext, cmd m.UpdateUserCommand) Response {
 	if setting.AuthProxyEnabled {
 		if setting.AuthProxyHeaderProperty == "email" && cmd.Email != c.Email {
-			return Error(400, "Not allowed to change email when auth proxy is using email property", nil)
+			return Error(400, "当认证代理使用邮箱时不允许修改邮箱", nil)
 		}
 		if setting.AuthProxyHeaderProperty == "username" && cmd.Login != c.Login {
-			return Error(400, "Not allowed to change username when auth proxy is using username property", nil)
+			return Error(400, "当认证代理使用用户名时不允许修改用户名", nil)
 		}
 	}
 	cmd.UserId = c.UserId
@@ -79,31 +79,31 @@ func UpdateUserActiveOrg(c *m.ReqContext) Response {
 	orgID := c.ParamsInt64(":orgId")
 
 	if !validateUsingOrg(userID, orgID) {
-		return Error(401, "Not a valid organization", nil)
+		return Error(401, "机构无效", nil)
 	}
 
 	cmd := m.SetUsingOrgCommand{UserId: userID, OrgId: orgID}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to change active organization", err)
+		return Error(500, "切换机构失败", err)
 	}
 
-	return Success("Active organization changed")
+	return Success("机构切换成功")
 }
 
 func handleUpdateUser(cmd m.UpdateUserCommand) Response {
 	if len(cmd.Login) == 0 {
 		cmd.Login = cmd.Email
 		if len(cmd.Login) == 0 {
-			return Error(400, "Validation error, need to specify either username or email", nil)
+			return Error(400, "验证错误, 需要指定用户名或者邮箱", nil)
 		}
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to update user", err)
+		return Error(500, "保存失败", err)
 	}
 
-	return Success("User updated")
+	return Success("保存成功")
 }
 
 // GET /api/user/orgs
@@ -120,7 +120,7 @@ func getUserOrgList(userID int64) Response {
 	query := m.GetUserOrgListQuery{UserId: userID}
 
 	if err := bus.Dispatch(&query); err != nil {
-		return Error(500, "Failed to get user organizations", err)
+		return Error(500, "获取用户机构失败", err)
 	}
 
 	return JSON(200, query.Result)
@@ -149,16 +149,16 @@ func UserSetUsingOrg(c *m.ReqContext) Response {
 	orgID := c.ParamsInt64(":id")
 
 	if !validateUsingOrg(c.UserId, orgID) {
-		return Error(401, "Not a valid organization", nil)
+		return Error(401, "机构无效", nil)
 	}
 
 	cmd := m.SetUsingOrgCommand{UserId: c.UserId, OrgId: orgID}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to change active organization", err)
+		return Error(500, "切换机构失败", err)
 	}
 
-	return Success("Active organization changed")
+	return Success("机构切换")
 }
 
 // GET /profile/switch-org/:id
@@ -180,40 +180,40 @@ func ChangeActiveOrgAndRedirectToHome(c *m.ReqContext) {
 
 func ChangeUserPassword(c *m.ReqContext, cmd m.ChangeUserPasswordCommand) Response {
 	if setting.LdapEnabled || setting.AuthProxyEnabled {
-		return Error(400, "Not allowed to change password when LDAP or Auth Proxy is enabled", nil)
+		return Error(400, "当启用LDAP或者认证代理时禁止修改密码", nil)
 	}
 
 	userQuery := m.GetUserByIdQuery{Id: c.UserId}
 
 	if err := bus.Dispatch(&userQuery); err != nil {
-		return Error(500, "Could not read user from database", err)
+		return Error(500, "数据库中无法读出用户", err)
 	}
 
 	passwordHashed := util.EncodePassword(cmd.OldPassword, userQuery.Result.Salt)
 	if passwordHashed != userQuery.Result.Password {
-		return Error(401, "Invalid old password", nil)
+		return Error(401, "无效的旧密码", nil)
 	}
 
 	password := m.Password(cmd.NewPassword)
 	if password.IsWeak() {
-		return Error(400, "New password is too short", nil)
+		return Error(400, "新密码太短", nil)
 	}
 
 	cmd.UserId = c.UserId
 	cmd.NewPassword = util.EncodePassword(cmd.NewPassword, userQuery.Result.Salt)
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to change user password", err)
+		return Error(500, "修改密码失败", err)
 	}
 
-	return Success("User password changed")
+	return Success("密码修改成功")
 }
 
 // GET /api/users
 func SearchUsers(c *m.ReqContext) Response {
 	query, err := searchUser(c)
 	if err != nil {
-		return Error(500, "Failed to fetch users", err)
+		return Error(500, "获取用户失败", err)
 	}
 
 	return JSON(200, query.Result.Users)
@@ -223,7 +223,7 @@ func SearchUsers(c *m.ReqContext) Response {
 func SearchUsersWithPaging(c *m.ReqContext) Response {
 	query, err := searchUser(c)
 	if err != nil {
-		return Error(500, "Failed to fetch users", err)
+		return Error(500, "获取用户失败", err)
 	}
 
 	return JSON(200, query.Result)
@@ -269,10 +269,10 @@ func SetHelpFlag(c *m.ReqContext) Response {
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to update help flag", err)
+		return Error(500, "更新帮助标志失败", err)
 	}
 
-	return JSON(200, &util.DynMap{"message": "Help flag set", "helpFlags1": cmd.HelpFlags1})
+	return JSON(200, &util.DynMap{"message": "设置帮助标志", "helpFlags1": cmd.HelpFlags1})
 }
 
 func ClearHelpFlags(c *m.ReqContext) Response {
@@ -282,8 +282,8 @@ func ClearHelpFlags(c *m.ReqContext) Response {
 	}
 
 	if err := bus.Dispatch(&cmd); err != nil {
-		return Error(500, "Failed to update help flag", err)
+		return Error(500, "更新帮助标志失败", err)
 	}
 
-	return JSON(200, &util.DynMap{"message": "Help flag set", "helpFlags1": cmd.HelpFlags1})
+	return JSON(200, &util.DynMap{"message": "设置帮助标志", "helpFlags1": cmd.HelpFlags1})
 }

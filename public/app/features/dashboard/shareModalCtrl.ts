@@ -8,28 +8,28 @@ export class ShareModalCtrl {
     $scope.options = {
       forCurrent: true,
       includeTemplateVars: true,
-      theme: 'current',
+      theme: '当前',
     };
     $scope.editor = { index: $scope.tabIndex || 0 };
 
     $scope.init = function() {
       $scope.modeSharePanel = $scope.panel ? true : false;
 
-      $scope.tabs = [{ title: 'Link', src: 'shareLink.html' }];
+      $scope.tabs = [{ title: '链接', src: 'shareLink.html' }];
 
       if ($scope.modeSharePanel) {
-        $scope.modalTitle = 'Share Panel';
-        $scope.tabs.push({ title: 'Embed', src: 'shareEmbed.html' });
+        $scope.modalTitle = '共享面板';
+        $scope.tabs.push({ title: '嵌入', src: 'shareEmbed.html' });
       } else {
-        $scope.modalTitle = 'Share';
+        $scope.modalTitle = '共享';
       }
 
       if (!$scope.dashboard.meta.isSnapshot) {
-        $scope.tabs.push({ title: 'Snapshot', src: 'shareSnapshot.html' });
+        $scope.tabs.push({ title: '快照', src: 'shareSnapshot.html' });
       }
 
       if (!$scope.dashboard.meta.isSnapshot && !$scope.modeSharePanel) {
-        $scope.tabs.push({ title: 'Export', src: 'shareExport.html' });
+        $scope.tabs.push({ title: '导出', src: 'shareExport.html' });
       }
 
       $scope.buildUrl();
@@ -59,7 +59,7 @@ export class ShareModalCtrl {
         delete params.to;
       }
 
-      if ($scope.options.theme !== 'current') {
+      if ($scope.options.theme !== '当前') {
         params.theme = $scope.options.theme;
       }
 

@@ -91,7 +91,7 @@ describe('SearchSrv', () => {
     });
 
     it('should include starred dashboards section', () => {
-      expect(results[0].title).toBe('Starred');
+      expect(results[0].title).toBe('标记过的仪表盘');
       expect(results[0].items.length).toBe(1);
     });
   });
@@ -114,13 +114,13 @@ describe('SearchSrv', () => {
     });
 
     it('should not show starred in recent', () => {
-      expect(results[1].title).toBe('Recent');
-      expect(results[1].items[0].title).toBe('recent');
+      expect(results[1].title).toBe('最近浏览过的仪表盘');
+      expect(results[1].items[0].title).toBe('最近浏览过的仪表盘');
     });
 
     it('should show starred', () => {
-      expect(results[0].title).toBe('Starred');
-      expect(results[0].items[0].title).toBe('starred and recent');
+      expect(results[0].title).toBe('标记过的仪表盘');
+      expect(results[0].items[0].title).toBe('标记过和最近浏览过的仪表盘');
     });
   });
 

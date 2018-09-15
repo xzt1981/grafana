@@ -51,7 +51,7 @@ export class CustomVariable implements Variable {
   }
 
   addAllOption() {
-    this.options.unshift({ text: 'All', value: '$__all' });
+    this.options.unshift({ text: '所有', value: '$__all' });
   }
 
   dependsOn(variable) {
@@ -71,8 +71,8 @@ export class CustomVariable implements Variable {
 }
 
 variableTypes['custom'] = {
-  name: 'Custom',
+  name: '自定义',
   ctor: CustomVariable,
-  description: 'Define variable values manually',
+  description: '用户自定义变量',
   supportsMulti: true,
 };

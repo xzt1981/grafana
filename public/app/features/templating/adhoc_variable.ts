@@ -80,7 +80,7 @@ export class AdhocVariable implements Variable {
 }
 
 variableTypes['adhoc'] = {
-  name: 'Ad hoc filters',
+  name: '临时过滤器',
   ctor: AdhocVariable,
-  description: 'Add key/value filters on the fly',
+  description: '即时添加键值对过滤器',
 };

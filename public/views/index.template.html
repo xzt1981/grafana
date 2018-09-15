@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width">
   <meta name="theme-color" content="#000">
 
-  <title>Grafana</title>
+  <title>虎鲸智能大数据运维系统</title>
 
   <base href="[[.AppSubUrl]]/" />
 
@@ -48,37 +48,6 @@
 
         <footer class="footer">
           <div class="text-center">
-            <ul>
-              <li>
-                <a href="http://docs.grafana.org" target="_blank">
-                  <i class="fa fa-file-code-o"></i>
-                  文档
-                </a>
-              </li>
-              <li>
-                <a href="https://grafana.com/services/support" target="_blank">
-                  <i class="fa fa-support"></i>
-                  支持计划
-                </a>
-              </li>
-              <li>
-                <a href="https://community.grafana.com/" target="_blank">
-                  <i class="fa fa-comments-o"></i>
-                  社区
-                </a>
-              </li>
-              <li>
-                <a href="https://grafana.com" target="_blank">[[.AppName]]</a>
-                <span>v[[.BuildVersion]] (commit: [[.BuildCommit]])</span>
-              </li>
-              [[if .NewGrafanaVersionExists]]
-              <li>
-                <a href="https://grafana.com/get" target="_blank" bs-tooltip="'[[.NewGrafanaVersion]]'">
-                  有新版本!
-                </a>
-              </li>
-              [[end]]
-            </ul>
           </div>
         </footer>
       </div>

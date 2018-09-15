@@ -17,7 +17,7 @@ export const SearchResultSection = types
         self.items.push(
           ResultItem.create({
             id: i,
-            title: 'Dashboard ' + self.items.length,
+            title: '仪表盘 ' + self.items.length,
             icon: 'gicon gicon-dashboard',
             url: 'asd',
           })

@@ -164,7 +164,7 @@ export default class TimePicker extends PureComponent<any, any> {
         <div className="gf-timepicker-absolute-section">
           <h3 className="section-heading">Custom range</h3>
 
-          <label className="small">From:</label>
+          <label className="small">从:</label>
           <div className="gf-form-inline">
             <div className="gf-form max-width-28">
               <input
@@ -176,7 +176,7 @@ export default class TimePicker extends PureComponent<any, any> {
             </div>
           </div>
 
-          <label className="small">To:</label>
+          <label className="small">到:</label>
           <div className="gf-form-inline">
             <div className="gf-form max-width-28">
               <input

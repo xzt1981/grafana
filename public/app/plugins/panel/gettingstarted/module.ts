@@ -16,17 +16,17 @@ class GettingStartedPanelCtrl extends PanelCtrl {
     this.steps = [];
 
     this.steps.push({
-      title: '安装Grafana',
+      title: '管理服务器',
+      cta: '管理服务器',
       icon: 'icon-gf icon-gf-check',
       href: 'http://docs.grafana.org/',
-      target: '_blank',
-      note: 'Review the installation docs',
+      note: '管理服务器',
       check: () => $q.when(true),
     });
 
     this.steps.push({
-      title: '创建你的第一个数据源',
-      cta: '添加数据',
+      title: '添加数据源',
+      cta: '添加数据源',
       icon: 'icon-gf icon-gf-datasources',
       href: 'datasources/new?gettingstarted',
       check: () => {
@@ -39,7 +39,7 @@ class GettingStartedPanelCtrl extends PanelCtrl {
     });
 
     this.steps.push({
-      title: '创建你的第一个仪表盘',
+      title: '新建仪表盘',
       cta: '新建仪表盘',
       icon: 'icon-gf icon-gf-dashboard',
       href: 'dashboard/new?gettingstarted',
@@ -51,7 +51,7 @@ class GettingStartedPanelCtrl extends PanelCtrl {
     });
 
     this.steps.push({
-      title: '邀请你的组员',
+      title: '邀请用户',
       cta: '添加用户',
       icon: 'icon-gf icon-gf-users',
       href: 'org/users?gettingstarted',
