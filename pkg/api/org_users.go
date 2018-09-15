@@ -118,7 +118,7 @@ func removeOrgUserHelper(orgID int64, userID int64) Response {
 
 	if err := bus.Dispatch(&cmd); err != nil {
 		if err == m.ErrLastOrgAdmin {
-			return Error(400, "不用删除唯一一个管理员", nil)
+			return Error(400, "不可删除管理员", nil)
 		}
 		return Error(500, "移除管理员失败", err)
 	}

@@ -518,7 +518,7 @@ func (cfg *Cfg) Load(args *CommandLineArgs) error {
 	// Temporary keep global, to make refactor in steps
 	Raw = cfg.Raw
 
-	ApplicationName = "Grafana"
+	ApplicationName = "虎鲸智能大数据运维系统"
 	if IsEnterprise {
 		ApplicationName += " Enterprise"
 	}
